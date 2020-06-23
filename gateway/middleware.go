@@ -37,6 +37,7 @@ func init() {
 var AuthenticateTenant = middleware.Func(func(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		logger := log.With(util.WithContext(r.Context(), util.Logger), "ip_address", r.RemoteAddr)
+		fmt.Println(r.RequestURI)
 		level.Debug(logger).Log("msg", "authenticating request", "route", r.RequestURI)
 
 		tokenString := r.Header.Get("Authorization") // Get operation is case insensitive

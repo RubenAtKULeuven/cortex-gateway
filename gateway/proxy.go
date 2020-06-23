@@ -1,6 +1,7 @@
 package gateway
 
 import (
+	"fmt"
 	"net/http"
 	"net/http/httputil"
 	"net/url"
@@ -31,6 +32,8 @@ func newProxy(target string, targetName string) (*Proxy, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	fmt.Println("created reverse proxy for target '" + target + "' with name '" + targetName + "'")
 
 	return &Proxy{
 		targetAddress: url,
