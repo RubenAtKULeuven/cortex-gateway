@@ -28,12 +28,12 @@ var (
 
 // newProxy creates a new reverse proxy for a single upstream service
 func newProxy(target string, targetName string) (*Proxy, error) {
+	fmt.Println("creating reverse proxy for target '" + target + "' with name '" + targetName + "'")
+
 	url, err := url.Parse(target)
 	if err != nil {
 		return nil, err
 	}
-
-	fmt.Println("created reverse proxy for target '" + target + "' with name '" + targetName + "'")
 
 	return &Proxy{
 		targetAddress: url,

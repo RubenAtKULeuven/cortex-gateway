@@ -1,6 +1,7 @@
 package gateway
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/cortexproject/cortex/pkg/util"
@@ -19,13 +20,17 @@ type Gateway struct {
 
 // New instantiates a new Gateway
 func New(cfg Config, svr *server.Server) (*Gateway, error) {
+	fmt.Println("Initializing gateway distributor")
 	// Initialize reverse proxy for each upstream target service
 	distributor, err := newProxy(cfg.DistributorAddress, "distributor")
 	if err != nil {
+		fmt.Println("Something went wrong (distributor)")
 		return nil, err
 	}
+	fmt.Println("Initializing gateway gateway")
 	queryFrontend, err := newProxy(cfg.QueryFrontendAddress, "query-frontend")
 	if err != nil {
+		fmt.Println("Something went wrong (query-frontend)")
 		return nil, err
 	}
 
