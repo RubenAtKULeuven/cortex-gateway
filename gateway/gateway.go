@@ -27,6 +27,7 @@ func New(cfg Config, svr *server.Server) (*Gateway, error) {
 		fmt.Println("Something went wrong (distributor)")
 		return nil, err
 	}
+
 	fmt.Println("Initializing gateway gateway")
 	queryFrontend, err := newProxy(cfg.QueryFrontendAddress, "query-frontend")
 	if err != nil {
